@@ -23,6 +23,11 @@
 	</p>
 
 	<p>
+		<%= f.label :company %><br>
+		<%= f.select :company_id, options_for_select(Company.all.map{ |c| [c.name, c.id] }) %>
+	</p>
+
+	<p>
 		<%= f.submit "Submit", :class => 'btn btn-primary' %>
 	</p>
 

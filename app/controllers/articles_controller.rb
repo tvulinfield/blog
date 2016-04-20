@@ -34,7 +34,11 @@ class ArticlesController < ApplicationController
 	end
 
 	def index
-		@articles = Article.all
+		if !params[:q].nil? and !params[:q].empty?
+			@articles = Article.where(:company_id => Company.find_by_name(params[:q]))
+		else
+			@articles = Article.all
+		end
 	end
 
 	def destroy
@@ -47,6 +51,6 @@ class ArticlesController < ApplicationController
 	private
 
 	def article_params
-		params.require(:article).permit(:title, :text)
+		params.require(:article).permit(:title, :text, :company_id)
 	end
 end
